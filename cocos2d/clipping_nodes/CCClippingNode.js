@@ -375,7 +375,6 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 
     _setStencilForCanvas: function (stencil) {
         this._stencil = stencil;
-        var locEGL_ScaleX = cc.EGLView.getInstance().getScaleX(), locEGL_ScaleY = cc.EGLView.getInstance().getScaleY();
         var locContext = cc.renderContext;
         // For texture stencil, use the sprite itself
         if (stencil instanceof cc.Sprite) {
@@ -384,6 +383,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
         // For shape stencil, rewrite the draw of stencil ,only init the clip path and draw nothing.
         else if (stencil instanceof cc.DrawNode) {
             stencil.draw = function () {
+                var locEGL_ScaleX = cc.EGLView.getInstance().getScaleX(), locEGL_ScaleY = cc.EGLView.getInstance().getScaleY();
                 for (var i = 0; i < stencil._buffer.length; i++) {
                     var element = stencil._buffer[i];
                     var vertices = element.verts;
